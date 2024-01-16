@@ -1,7 +1,11 @@
 "use client";
-import { data } from "./data";
 import { KeyboardEvent, useEffect, useState } from "react";
+
 import MappedList from "./Common/MappedList";
+import Tag from "./Component/Tag";
+import DropDownElement from "./Component/DropDownElement";
+import { data } from "./data";
+
 export default function Home() {
   const originalData: Array<Data> = data;
   const [searchList, setSearchList] = useState<Array<DataWithMarking>>(
@@ -17,9 +21,8 @@ export default function Home() {
     })
   );
 
-  const [showDropDown, setShowDropDown] = useState(false);
-
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [showDropDown, setShowDropDown] = useState(false);
 
   useEffect(() => {
     setFilteredSearchList(
@@ -104,21 +107,3 @@ export default function Home() {
     </main>
   );
 }
-
-const Tag = (props: { item: DataWithMarking; onClickFunc: Function }) => {
-  return (
-    <div>
-      <p>{props.item.city}</p>
-      <button onClick={() => props.onClickFunc(props.item.id)}>X</button>
-    </div>
-  );
-};
-
-const DropDownElement = (props: {
-  item: DataWithMarking;
-  onClickFunc: Function;
-}) => {
-  return (
-    <li onClick={() => props.onClickFunc(props.item.id)}>{props.item.city}</li>
-  );
-};
