@@ -1,6 +1,6 @@
 "use client";
 import { data } from "./data";
-import { useEffect, useState } from "react";
+import { KeyboardEvent, useEffect, useState } from "react";
 import MappedList from "./Common/MappedList";
 export default function Home() {
   const originalData: Array<Data> = data;
@@ -56,6 +56,16 @@ export default function Home() {
 
     setSearchList(newSearchList);
   };
+
+  const onBackSpace = (e: KeyboardEvent<HTMLElement>) => {
+    var key = e.key;
+    if (key === "Backspace") {
+      if (!searchQuery) {
+        let lastChip = searchList.findLast((el) => el.isInChipList);
+        if (lastChip) removeChip(lastChip.id);
+      }
+    }
+  };
   return (
     <main className="container">
       <div className="tags">
@@ -73,6 +83,7 @@ export default function Home() {
             onClick={() => setShowDropDown(true)}
             onFocus={() => setShowDropDown(true)}
             placeholder="select tag"
+            onKeyDown={onBackSpace}
           />
           {showDropDown && (
             <ul

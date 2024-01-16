@@ -47,6 +47,7 @@ body {
   height: 40px;
   display: block;
   width: 100%;
+  height: 100%;
 }
 .search-list input:focus {
   outline-width: 0;
